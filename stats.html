@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CogniQuest — Scores</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="bg"></div>
+  <header class="topbar glass">
+    <div class="brand">
+      <span class="logo">🏆</span>
+      <h1>Scores</h1>
+    </div>
+    <nav class="nav">
+      <a class="btn ghost" href="index.html">🎴 Play</a>
+      <button id="clearScores" class="btn danger">Clear All</button>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <section class="panel glass">
+      <h2 class="title">Best Times</h2>
+      <div id="bests" class="bests"></div>
+    </section>
+    <section class="panel glass">
+      <h2 class="title">Recent Games</h2>
+      <div id="recent" class="recent"></div>
+    </section>
+  </main>
+
+  <script src="stats.js"></script>
+</body>
+</html>

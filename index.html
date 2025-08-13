@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CogniQuest — Memory Match</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="bg"></div>
+
+  <header class="topbar glass">
+    <div class="brand">
+      <span class="logo">🧠</span>
+      <h1>CogniQuest</h1>
+    </div>
+    <nav class="nav">
+      <a class="btn ghost" href="stats.html" aria-label="View best scores">🏆 Scores</a>
+      <button id="themeToggle" class="btn ghost" aria-label="Toggle theme">🎨 Theme</button>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <section class="panel glass">
+      <h2 class="title">Customize your Quest</h2>
+      <p class="subtitle">Upload an <b>even</b> number of images or use defaults, pick a grid and preview time, then match all pairs.</p>
+
+      <fieldset class="form-row chooser">
+        <legend class="label">Image Source</legend>
+        <label><input type="radio" name="imgsrc" value="default" checked> Use default emojis</label>
+        <label><input type="radio" name="imgsrc" value="custom"> Upload custom images</label>
+      </fieldset>
+
+      <div class="form-row" id="uploader" hidden>
+        <label for="imageFiles" class="label">Choose Images</label>
+        <input type="file" id="imageFiles" accept="image/*" multiple>
+        <small class="hint">Upload at least 2 images. We'll duplicate & shuffle them.</small>
+      </div>
+
+      <div class="form-row grid">
+        <span class="label">Grid</span>
+        <div class="btn-group" role="group" aria-label="Difficulty presets">
+          <button class="btn pill" data-grid="2x4">2×4</button>
+          <button class="btn pill" data-grid="2x5">2×5</button>
+          <button class="btn pill" data-grid="2x6">2×6</button>
+          <button class="btn pill" data-grid="4x4">4×4</button>
+        </div>
+        <div class="custom-grid">
+          <input id="rows" type="number" min="2" max="6" value="2" aria-label="Rows">
+          <span>×</span>
+          <input id="cols" type="number" min="4" max="8" value="4" aria-label="Columns">
+          <button id="applyCustom" class="btn ghost">Apply</button>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label for="previewTime" class="label">Preview Time</label>
+        <select id="previewTime">
+          <option value="1">1 second</option>
+          <option value="2">2 seconds</option>
+          <option value="3" selected>3 seconds</option>
+          <option value="5">5 seconds</option>
+          <option value="8">8 seconds</option>
+          <option value="10">10 seconds</option>
+        </select>
+      </div>
+
+      <div class="actions">
+        <button id="startBtn" class="btn primary">Start Game</button>
+      </div>
+    </section>
+
+    <section class="hud glass" aria-live="polite">
+      <div class="hud-item"><span>⏱ Time</span><strong id="time">00:00</strong></div>
+      <div class="hud-item"><span>🪙 Moves</span><strong id="moves">0</strong></div>
+      <div class="hud-item"><span>❌ Errors</span><strong id="errors">0</strong></div>
+      <div class="hud-item"><span>✅ Matches</span><strong id="matches">0</strong></div>
+      <div class="hud-actions">
+        <button id="hintBtn" class="btn ghost" disabled>💡 Hint (3)</button>
+        <button id="pauseBtn" class="btn ghost" disabled>⏸ Pause</button>
+        <button id="shuffleBtn" class="btn ghost" disabled>🔀 Shuffle</button>
+        <button id="restartBtn" class="btn danger" disabled>🔄 Restart</button>
+      </div>
+    </section>
+
+    <section id="boardWrap" class="board-wrap">
+      <div id="countdown" class="countdown hidden">3</div>
+      <div id="board" class="board" aria-label="Memory board" role="grid"></div>
+      <canvas id="confetti" class="confetti"></canvas>
+    </section>
+  </main>
+
+  <footer class="foot glass">
+    <span>Made with ♥ by Neelesh</span>
+  </footer>
+
+  <template id="cardTpl">
+    <button class="card" role="gridcell" aria-pressed="false" aria-label="Hidden card">
+      <div class="card-inner">
+        <div class="card-face front"></div>
+        <div class="card-face back"></div>
+      </div>
+    </button>
+  </template>
+
+  <div id="winModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="winTitle">
+    <div class="modal-body glass">
+      <h3 id="winTitle">You did it! 🎉</h3>
+      <p id="winStats"></p>
+      <div class="actions">
+        <button id="playAgain" class="btn primary">Play Again</button>
+        <a href="stats.html" class="btn ghost">View Scores</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
