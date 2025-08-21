@@ -30,4 +30,3 @@ Clear the board in the fewest moves — and the fastest time — to achieve a hi
 
 ## 🚀 Getting Started
 
-### 1️⃣ Clone the Repository
