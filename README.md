@@ -65,12 +65,4 @@ The project also features a **stats page (stats.html)** where your best scores a
 
 ---
 
-## 🌐 Deployment
-This project works as a static site (no backend).  
-You can host it for free using **GitHub Pages**:
-
-1. Push this repo to GitHub.
-2. Go to **Settings → Pages**.
-3. Under *Branch*, select `main` and folder `/ (root)`.
-4. Save → Your game will be live at:
 
