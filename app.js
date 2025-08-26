@@ -28,6 +28,14 @@
   const radioDefault = qs('input[value="default"]');
   const radioCustom = qs('input[value="custom"]');
   const uploader = qs('#uploader');
+  const musicToggle = qs('#musicToggle');
+
+  // 🎵 Audio elements
+  const bgMusic = qs('#bgMusic');
+  const flipCorrect = qs('#flipCorrect');
+  const flipWrong = qs('#flipWrong');
+  const winSound = qs('#winSound');
+  let musicEnabled = true;
 
   // Default content if no images uploaded
   const EMOJIS = ['🍎','🍌','🍇','🍑','🍒','🍍','🥝','🍓','🥥','🍉','🍋','🫐','🥕','🌽','🍆','🥑','🍪','🍰','🍩','🍫'];
@@ -117,7 +125,6 @@
   }
 
   async function buildDeck(){
-    // Build images from uploads or emojis
     let faces = [];
     if(state.useCustom){
       const files = [...imageFiles.files||[]].slice(0, 24);
@@ -133,7 +140,6 @@
     } else {
       faces = EMOJIS.slice();
     }
-    // duplicate and shuffle to fit pair count
     const pairCount = (state.rows*state.cols)/2;
     const deckFaces = [];
     for(let i=0;i<pairCount;i++){
@@ -157,7 +163,6 @@
       node.dataset.index = idx;
       const front = node.querySelector('.front');
       const back = node.querySelector('.back');
-      // Front is the back of card (hidden), Back shows face after flip
       front.innerHTML = '🧩';
       if(typeof face === 'string' && face.startsWith('data:')){
         back.style.backgroundImage = `url(${face})`;
@@ -185,8 +190,14 @@
     }catch{ return; }
     renderBoard();
     setControlsEnabled(false);
-    // Reveal preview
-    const previewMs = state.preview*1000;
+
+    // 🎵 Start background music
+    if(musicEnabled){
+      bgMusic.volume = 0.4;
+      bgMusic.currentTime = 0;
+      bgMusic.play().catch(err => console.log("Music blocked:", err));
+    }
+
     qsa('.card').forEach(c => c.classList.add('flipped'));
     countdown.classList.remove('hidden');
     let left = state.preview;
@@ -218,9 +229,17 @@
       card.classList.add('matched');
       first.card.classList.add('matched');
       state.matches++; matchesEl.textContent = String(state.matches);
+
+      // ✅ Correct match sound
+      if(musicEnabled){ flipCorrect.currentTime = 0; flipCorrect.play(); }
+
       if(state.matches === state.totalPairs){ onWin(); }
     } else {
       state.errors++; errorsEl.textContent = String(state.errors);
+
+      // ✅ Wrong flip sound
+      if(musicEnabled){ flipWrong.currentTime = 0; flipWrong.play(); }
+
       state.lock = true;
       setTimeout(()=>{
         card.classList.remove('flipped');
@@ -255,11 +274,12 @@
     state.deck = faces;
     const flipped = qsa('.card').map(c => c.classList.contains('flipped') || c.classList.contains('matched'));
     renderBoard();
-    // maintain face-up cards if any were up
     qsa('.card').forEach((c,i)=>{ if(flipped[i]) c.classList.add('flipped'); });
   });
 
   restartBtn.addEventListener('click', () => {
+    bgMusic.pause();
+    bgMusic.currentTime = 0;
     stopTimer();
     startGame();
   });
@@ -267,10 +287,30 @@
   startBtn.addEventListener('click', startGame);
   playAgain.addEventListener('click', () => { winModal.classList.add('hidden'); startGame(); });
 
+  // 🎵 Music toggle button
+  musicToggle.addEventListener('click', () => {
+    musicEnabled = !musicEnabled;
+    if(musicEnabled){
+      musicToggle.textContent = "🎵 Music On";
+      bgMusic.play().catch(()=>{});
+    } else {
+      musicToggle.textContent = "🎵 Music Off";
+      bgMusic.pause();
+    }
+  });
+
   function onWin(){
     stopTimer();
     setControlsEnabled(false);
     confettiBurst();
+
+    // ✅ Stop bg music, play win sound
+    if(musicEnabled){
+      bgMusic.pause();
+      winSound.currentTime = 0;
+      winSound.play();
+    }
+
     const grid = `${state.rows}x${state.cols}`;
     winStats.textContent = `Grid ${grid} • Time ${timeEl.textContent} • Moves ${state.moves} • Errors ${state.errors}`;
     saveScore({ grid, timeSec: state.elapsed, moves: state.moves, errors: state.errors, date: Date.now() });
@@ -278,11 +318,9 @@
   }
 
   function saveScore(entry){
-    // keep recent 50
     const arr = JSON.parse(localStorage.getItem('cq-scores')||'[]');
     arr.unshift(entry);
     localStorage.setItem('cq-scores', JSON.stringify(arr.slice(0,50)));
-    // bests
     const bests = JSON.parse(localStorage.getItem('cq-bests')||'{}');
     const g = entry.grid;
     const current = bests[g];
