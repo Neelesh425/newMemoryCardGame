@@ -1,6 +1,7 @@
 # 🧠 CogniQuest — Memory Match Game
 
-Play Now : https://neelesh425.github.io/newMemoryCardGame/
+Play Now : https://neelesh425.github.io/newMemoryCardGame
+
 CogniQuest is a fun and interactive **memory card matching game**  that will sharpen your short term memory built with HTML, CSS, and JavaScript.  
 You can play using default **emojis** or upload your own **custom images** to make the challenge more exciting.  
 
