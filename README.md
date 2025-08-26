@@ -1,31 +1,75 @@
-# 🃏 Memory Card Game
+# 🧠 CogniQuest — Memory Match Game
 
-A fun and interactive browser‑based game where players match pairs of cards to test and train their memory skills.  
-Designed for smooth gameplay, responsive UI, and easy customization.
+Play Now : https://neelesh425.github.io/newMemoryCardGame/
+CogniQuest is a fun and interactive **memory card matching game**  that will sharpen your short term memory built with HTML, CSS, and JavaScript.  
+You can play using default **emojis** or upload your own **custom images** to make the challenge more exciting.  
 
----
-
-## 🎯 Objective
-Flip over two cards at a time to find matching pairs.  
-Clear the board in the fewest moves — and the fastest time — to achieve a high score!
+The project also features a **stats page (stats.html)** where your best scores and recent plays are recorded and displayed.
 
 ---
 
-## ✨ Features
-- 🖼 **Customizable Cards** – Swap in your own images or icons.
-- 📱 **Responsive Design** – Plays beautifully on desktop and mobile.
-- ⏱ **Timer & Move Counter** – Track your performance.
-- 🔄 **Restart Game** – Play again instantly with a reshuffled deck.
-- 🎵 **Optional Sounds/Animations** – Add feedback for flips & matches.
+## 🎮 Features
+- 🎴 **Customizable Decks** — Play with default emojis or upload your own images.
+- 📐 **Custom Grid Sizes** — Choose preset grids (2x4, 4x4, etc.) or define your own rows/columns.
+- ⏱ **Preview Time** — Adjust how long cards stay revealed before the game starts.
+- 🧩 **HUD (Game Stats)** — Track time, moves, errors, and matches live.
+- 💡 **Hints, Pause, Shuffle, Restart** controls.
+- 🎶 **Sound Effects + Background Music** — With a handy **toggle button** for music.
+- 🎉 **Win Celebration** — Confetti animation and victory sound when you finish.
+- 📊 **Stats Page** — Stores recent results and best scores in local storage.
 
 ---
 
-## 🛠 Tech Stack
-- **Frontend:** HTML5, CSS3, JavaScript (ES6+)
-- **Optional Enhancements:**  
-  - Tailwind CSS for rapid styling  
-  - GSAP / Anime.js for smooth animations
+## 🚀 How to Play
+1. Open **index.html** in your browser.
+2. Select:
+   - Image source (default emojis or upload custom images).
+   - Grid size (preset or custom).
+   - Preview time.
+3. Click **Start Game**.
+4. Flip cards to find matching pairs:
+   - ✅ Correct match → +1 match
+   - ❌ Wrong flip → +1 error
+5. Finish the game by matching all pairs.  
+   Your results are recorded in **stats.html**.
 
 ---
 
+## 📷 Screenshots
+*(Add your own here — e.g., game board, stats page)*
+
+---
+
+## 📊 Stats Page
+- Accessible via the **🏆 Scores** button in the top navigation.
+- Shows:
+  - Best scores (per grid size).
+  - Recent plays (last 50 games).
+- Data is saved in **LocalStorage** (persists even if you refresh).
+
+---
+
+## 🔊 Audio
+- 🎵 Background music (toggleable).
+- ✅ Sound on correct match.
+- ❌ Sound on wrong flip.
+- 🎉 Win sound.
+
+---
+
+## 🛠️ Tech Stack
+- **HTML5** — Game layout & structure
+- **CSS3** — Styling with glassmorphism & responsive design
+- **JavaScript (Vanilla)** — Game logic, HUD, animations, local storage
+
+---
+
+## 🌐 Deployment
+This project works as a static site (no backend).  
+You can host it for free using **GitHub Pages**:
+
+1. Push this repo to GitHub.
+2. Go to **Settings → Pages**.
+3. Under *Branch*, select `main` and folder `/ (root)`.
+4. Save → Your game will be live at:
 
