@@ -176,3 +176,8 @@ select, input[type="file"]{
   --text: 220 20% 12%;
   --muted: 220 10% 40%;
 }
+.game-area {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

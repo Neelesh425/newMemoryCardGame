@@ -73,18 +73,28 @@
       </div>
     </section>
 
-    <section class="hud glass" aria-live="polite">
-      <div class="hud-item"><span>⏱ Time</span><strong id="time">00:00</strong></div>
-      <div class="hud-item"><span>🪙 Moves</span><strong id="moves">0</strong></div>
-      <div class="hud-item"><span>❌ Errors</span><strong id="errors">0</strong></div>
-      <div class="hud-item"><span>✅ Matches</span><strong id="matches">0</strong></div>
-      <div class="hud-actions">
-        <button id="hintBtn" class="btn ghost" disabled>💡 Hint (3)</button>
-        <button id="pauseBtn" class="btn ghost" disabled>⏸ Pause</button>
-        <button id="shuffleBtn" class="btn ghost" disabled>🔀 Shuffle</button>
-        <button id="restartBtn" class="btn danger" disabled>🔄 Restart</button>
-      </div>
-    </section>
+<div class="game-area">
+  <section class="hud glass" aria-live="polite">
+    <div class="hud-item"><span>⏱ Time</span><strong id="time">00:00</strong></div>
+    <div class="hud-item"><span>🪙 Moves</span><strong id="moves">0</strong></div>
+    <div class="hud-item"><span>❌ Errors</span><strong id="errors">0</strong></div>
+    <div class="hud-item"><span>✅ Matches</span><strong id="matches">0</strong></div>
+    <div class="hud-actions">
+      <button id="musicToggle" class="btn ghost">🎵 Music On</button>
+      <button id="hintBtn" class="btn ghost" disabled>💡 Hint (3)</button>
+      <button id="pauseBtn" class="btn ghost" disabled>⏸ Pause</button>
+      <button id="shuffleBtn" class="btn ghost" disabled>🔀 Shuffle</button>
+      <button id="restartBtn" class="btn danger" disabled>🔄 Restart</button>
+    </div>
+  </section>
+
+  <section id="boardWrap" class="board-wrap">
+    <div id="countdown" class="countdown hidden">3</div>
+    <div id="board" class="board" aria-label="Memory board" role="grid"></div>
+    <canvas id="confetti" class="confetti"></canvas>
+  </section>
+</div>
+
 
     <section id="boardWrap" class="board-wrap">
       <div id="countdown" class="countdown hidden">3</div>
@@ -116,6 +126,11 @@
       </div>
     </div>
   </div>
+
+  <audio id="bgMusic" src="bg-music.mp3" loop></audio>
+  <audio id="flipCorrect" src="flip-correct.mp3"></audio>
+  <audio id="flipWrong" src="flip-wrong.mp3"></audio>
+  <audio id="winSound" src="win.mp3"></audio>
 
   <script src="app.js"></script>
 </body>
